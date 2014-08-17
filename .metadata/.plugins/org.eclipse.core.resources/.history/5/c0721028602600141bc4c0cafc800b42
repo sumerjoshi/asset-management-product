@@ -1,0 +1,73 @@
+package Items;
+
+public class Item implements IItem
+{
+	private ItemProp _context;
+	private ItemType _type;
+	
+	public Item()
+	{
+	}
+	
+	public Item(ItemType type)
+	{
+		this.setType(type);
+	}
+
+	public ItemProp getContext() {
+		return this._context;
+	}
+
+	public void setContext(ItemProp _context) {
+		this._context = _context;
+	}
+
+	public ItemType getType() {
+		return this._type;
+	}
+
+	public void setType(ItemType _type) {
+		this._type = _type;
+	}
+	
+	
+	public void setLocation(String loc)
+	{
+		this._location = loc;
+	}
+	public String getLocation()
+	{
+		return this._location;
+	}
+	
+	public void setDepartment(String dep)
+	{
+		this._department= dep;
+	}
+	public String getDepartment()
+	{
+		return this._department;
+	}
+	
+	public void setName(String name)
+	{
+		this._name = name;
+	}
+	public String getName()
+	{
+		return this._name;
+	}
+	
+	public void setDescription(String desc)
+	{
+		this._description = desc;
+	}
+	
+	public String getDescription()
+	{
+		return this._description;
+	}
+}
+	
+	
+}

@@ -51,7 +51,6 @@ public class ItemProp
 	{
 		this._description = desc;
 	}
-	
 	public String getDescription()
 	{
 		return this._description;

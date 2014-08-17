@@ -1,0 +1,11 @@
+import java.util.List;
+
+package Items;
+
+
+
+public class ItemPropProtoManager {
+	
+	private List>
+	
+}

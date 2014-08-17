@@ -1,0 +1,18 @@
+package Items;
+
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
+
+public class ItemProtoManager {
+
+	private HashMap<ItemType, IItem> _itemDict;
+	
+	public ItemProtoManager()
+	{
+		this._itemDict = new HashMap<ItemType, IItem>();
+	}
+	
+	
+	
+}

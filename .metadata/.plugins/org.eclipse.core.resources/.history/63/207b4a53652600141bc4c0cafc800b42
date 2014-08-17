@@ -1,0 +1,11 @@
+package Items;
+
+import java.util.Dictionary;
+
+public class ItemProtoManager {
+
+	private Dictionary<ItemType, IItem> _stuff;
+	
+	
+	
+}

@@ -15,21 +15,70 @@ public class Item implements IItem
 	}
 
 	public ItemProp getContext() {
-		return _context;
+		return this._context;
 	}
-
 	public void setContext(ItemProp _context) {
 		this._context = _context;
 	}
 
 	public ItemType getType() {
-		return _type;
+		return this._type;
 	}
-
 	public void setType(ItemType _type) {
 		this._type = _type;
 	}
 	
 	
+	public void setLocation(String loc)
+	{
+		if (this._context != null)
+			this._context.setLocation(loc);
+	}
+	public String getLocation()
+	{
+		if (this._context != null)
+			return this._context.getLocation();
+		else
+			return  "";
+	}
 	
+	public void setDepartment(String dep)
+	{
+		if (this._context != null)
+			this._context.setDepartment(dep);
+	}
+	public String getDepartment()
+	{
+		if (this._context != null)
+			return this._context.getDepartment();
+		else
+			return  "";
+	}
+	
+	public void setName(String name)
+	{
+		if (this._context != null)
+			this._context.setName(name);
+	}
+	public String getName()
+	{
+		if (this._context != null)
+			return this._context.getName();
+		else
+			return  "";
+	}
+	
+	public void setDescription(String desc)
+	{
+		if (this._context != null)
+			this._context.setDescription(desc);
+	}
+	public String getDescription()
+	{
+		if (this._context != null)
+			return this._context.getDescription();
+		else
+			return  "";
+	}
 }
+

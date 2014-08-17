@@ -1,0 +1,12 @@
+import java.util.List;
+
+package Items;
+
+
+
+public class ItemPropProtoManager {
+	
+	private List<String> _locationList;
+	private List<String> _DepartmentList
+	
+}
