@@ -1,5 +1,15 @@
 package Items;
 
+public enum ItemType{
+	Cable, Monitor, PCAccessory, PC
+}
+
+public interface IItem
+{
+	
+	
+}
+
 public class Item implements IItem
 {
 	private ItemProp _context;
