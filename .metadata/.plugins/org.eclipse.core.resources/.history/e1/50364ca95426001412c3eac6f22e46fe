@@ -1,0 +1,25 @@
+
+
+
+public interface IItem
+{
+	
+	
+}
+
+public class Item implements IItem
+{
+
+}
+
+
+public class ItemProp
+{
+	private String _location;
+	private String _department;
+	private String _name;
+	private String _description;
+	
+	
+	
+}
