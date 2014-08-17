@@ -23,9 +23,7 @@ public class ItemProtoManager {
 	public Item getItem(ItemType type)
 	{
 		Item retval = null;
-		retval = this._itemDict.get(type);
-		
-		return retval;
+		this._itemDict.get(type); 
 	}
 	
 }

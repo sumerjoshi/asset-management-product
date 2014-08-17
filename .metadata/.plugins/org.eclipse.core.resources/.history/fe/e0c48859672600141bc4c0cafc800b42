@@ -1,14 +1,15 @@
 package Items;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 
 public class ItemProtoManager {
 
-	private HashMap<ItemType, Item> _itemDict;
+	private HashMap<ItemType, IItem> _itemDict;
 	
 	public ItemProtoManager()
 	{
-		this._itemDict = new HashMap<ItemType, Item>();
+		this._itemDict = new HashMap<ItemType, IItem>();
 	}
 	
 	public void populateDict()
@@ -20,12 +21,6 @@ public class ItemProtoManager {
 		}
 	}
 	
-	public Item getItem(ItemType type)
-	{
-		Item retval = null;
-		retval = this._itemDict.get(type);
-		
-		return retval;
-	}
+	
 	
 }
