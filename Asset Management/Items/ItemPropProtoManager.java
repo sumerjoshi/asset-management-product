@@ -8,11 +8,17 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	
 	private List<String> _locationList;
 	private List<String> _departmentList;
+	private static ItemPropProtoManager _inst;
 	
-	public ItemPropProtoManager()
+	private ItemPropProtoManager()
 	{
 		this._locationList = new ArrayList<String>();
 		this._departmentList = new ArrayList<String>();
+	}
+	
+	public static ItemPropProtoManager instance()
+	{
+		return _inst;
 	}
 	
 	public void addLocation(String loc)

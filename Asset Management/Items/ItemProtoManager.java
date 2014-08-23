@@ -2,13 +2,20 @@ package Items;
 
 import java.util.HashMap;
 
-public class ItemProtoManager {
+public class ItemProtoManager implements IItemProtoManager
+{
 
 	private HashMap<ItemType, Item> _itemDict;
+	private static ItemProtoManager _inst;
 	
-	public ItemProtoManager()
+	private ItemProtoManager()
 	{
 		this._itemDict = new HashMap<ItemType, Item>();
+	}
+	
+	public static ItemProtoManager instance()
+	{
+		return _inst;
 	}
 	
 	// TODO will need fixing upon expansion of weight
