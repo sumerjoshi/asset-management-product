@@ -11,7 +11,6 @@ public class ItemProtoManager {
 		this._itemDict = new HashMap<ItemType, Item>();
 	}
 	
-	// TODO will need fixing upon expansion of weight
 	public void populateDict()
 	{
 		ItemType[] vals = ItemType.values();

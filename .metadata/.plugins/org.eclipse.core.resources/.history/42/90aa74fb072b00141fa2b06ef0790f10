@@ -90,7 +90,7 @@ public class Item implements IItem
 		if(this._context != null)
 			return this.getID();
 		else
-			return -1;
+			return 0;
 	}
 }
 

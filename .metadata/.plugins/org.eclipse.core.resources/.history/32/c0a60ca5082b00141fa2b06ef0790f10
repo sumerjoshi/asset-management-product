@@ -2,10 +2,8 @@ package Items;
 
 import java.util.HashMap;
 
-public class ItemProtoManager {
+public interface IItemProtoManager {
 
-	private HashMap<ItemType, Item> _itemDict;
-	
 	public ItemProtoManager()
 	{
 		this._itemDict = new HashMap<ItemType, Item>();

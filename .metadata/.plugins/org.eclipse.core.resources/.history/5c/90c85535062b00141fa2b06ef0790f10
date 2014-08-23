@@ -33,10 +33,4 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	{
 		return this._departmentList;
 	}
-	
-	//TODO Flesh this one out
-	public void populateLists()
-	{
-		
-	}
 }

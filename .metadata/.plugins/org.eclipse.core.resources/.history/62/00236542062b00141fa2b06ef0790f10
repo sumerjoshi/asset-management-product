@@ -35,8 +35,4 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	}
 	
 	//TODO Flesh this one out
-	public void populateLists()
-	{
-		
-	}
 }

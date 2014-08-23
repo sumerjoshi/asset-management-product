@@ -4,4 +4,16 @@
 <fullyQualifiedTypeName name="ItemProp"/>
 <fullyQualifiedTypeName name="Item"/>
 <fullyQualifiedTypeName name="ItemType"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="Items.ItemPropProtoManager"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="Items.IItemPropProtoManager"/>
+<fullyQualifiedTypeName name="java.lang.LinkageError"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="Items.ItemProtoManager"/>
+<fullyQualifiedTypeName name="java.util.Dictionary"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="Items.IItem"/>
+<fullyQualifiedTypeName name="Items.Item"/>
+<fullyQualifiedTypeName name="Items.ItemType"/>
 </qualifiedTypeNameHistroy>

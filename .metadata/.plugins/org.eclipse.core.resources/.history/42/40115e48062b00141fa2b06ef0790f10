@@ -9,5 +9,5 @@ public interface IItemPropProtoManager {
 	
 	List<String> getLocations();
 	List<String> getDepartments();	
-	void populateLists();
+	void populateLists()
 }
