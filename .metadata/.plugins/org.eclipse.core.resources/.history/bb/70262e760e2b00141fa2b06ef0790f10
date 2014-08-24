@@ -1,9 +1,0 @@
-package Items;
-
-public class ItemBuilder {
-
-	private IItem _holder;
-	
-	public IItem BuildItem()
-	
-}

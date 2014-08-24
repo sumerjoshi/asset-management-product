@@ -23,13 +23,11 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	
 	public void addLocation(String loc)
 	{
-		if (!locationExists(loc))
-			this._locationList.add(loc);
+		this._locationList.add(loc);
 	}
 	public void addDepartment(String dep)
 	{
-		if(!departmentExists(dep))
-			this._departmentList.add(dep);
+		this._departmentList.add(dep);
 	}
 	
 	public List<String> getLocations()
@@ -40,19 +38,6 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	public List<String> getDepartments()
 	{
 		return this._departmentList;
-	}
-	
-	public boolean locationExists(String loc)
-	{
-		if(this._locationList.contains(loc))
-			return true;
-		return false;
-	}
-	public boolean departmentExists(String dept)
-	{
-		if(this._departmentList.contains(dept))
-			return true;
-		return false;
 	}
 	
 	//TODO Flesh this one out

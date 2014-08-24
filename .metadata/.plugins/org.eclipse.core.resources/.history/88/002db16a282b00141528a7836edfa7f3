@@ -11,5 +11,5 @@ public interface IItemPropProtoManager {
 	List<String> getDepartments();	
 	void populateLists();
 	boolean locationExists(String loc);
-	boolean departmentExists(String dept);
+	public boolean departmentExists(String dept);
 }

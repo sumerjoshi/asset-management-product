@@ -78,7 +78,7 @@ public class ItemBuilder {
 	
 	private boolean verifyLoc(String loc)
 	{
-		return ItemPropProtoManager.instance().locationExists(loc);
+		return ItemPropProtoManager.instance().locationExists(loc)
 	}
 	private boolean verifyDept(String dept)
 	{

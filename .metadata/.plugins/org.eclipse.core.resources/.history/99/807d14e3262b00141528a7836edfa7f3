@@ -1,0 +1,17 @@
+package GUI;
+
+import javax.swing.*;
+
+public class MainGUI extends javax.swing.JFrame
+{
+	public MainGUI()
+	{
+		
+	}
+	
+	public void init()
+	{
+		this.setTitle("stuff");
+		this.setSize(800, 600)
+	}
+}

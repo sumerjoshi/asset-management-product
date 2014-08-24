@@ -78,7 +78,15 @@ public class ItemBuilder {
 	
 	private boolean verifyLoc(String loc)
 	{
-		return ItemPropProtoManager.instance().locationExists(loc);
+		boolean retval = true;
+		List<String> locations = ItemPropProtoManager.instance().getLocations();
+		
+		if(loc == "")
+			retval = false;
+		if(!locations.contains(loc))
+			retval = false;
+		
+		return retval;
 	}
 	private boolean verifyDept(String dept)
 	{

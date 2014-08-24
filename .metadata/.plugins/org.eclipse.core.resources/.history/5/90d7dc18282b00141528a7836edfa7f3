@@ -24,12 +24,11 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	public void addLocation(String loc)
 	{
 		if (!locationExists(loc))
-			this._locationList.add(loc);
+		this._locationList.add(loc);
 	}
 	public void addDepartment(String dep)
 	{
-		if(!departmentExists(dep))
-			this._departmentList.add(dep);
+		this._departmentList.add(dep);
 	}
 	
 	public List<String> getLocations()
