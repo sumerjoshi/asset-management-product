@@ -6,7 +6,7 @@ public class ItemProtoManager implements IItemProtoManager
 {
 
 	private HashMap<ItemType, Item> _itemDict;
-	private static ItemProtoManager _inst;
+	private static ItemProtoManager _inst = new ItemProtoManager();
 	
 	private ItemProtoManager()
 	{

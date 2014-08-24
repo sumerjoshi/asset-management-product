@@ -8,7 +8,7 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 	
 	private List<String> _locationList;
 	private List<String> _departmentList;
-	private static ItemPropProtoManager _inst;
+	private static ItemPropProtoManager _inst = new ItemPropProtoManager();
 	
 	private ItemPropProtoManager()
 	{
