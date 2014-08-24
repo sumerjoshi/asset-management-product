@@ -1,64 +1,69 @@
 package Items;
 
-import java.awt.event.ItemListener;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import java.net.UnknownHostException;
+
 
 public class DatabaseDriver {
 	
 	public Mongo mongoClient;
 	public DB db;
-	public DBCollection collection;
+	public DBCollection table;
 	public ItemBuilder itemBuilder;
 	public ArrayList<IItem> itemsList;
 	public ItemPropProtoManager manager;
 	
 	public DatabaseDriver(){
-		manager = ItemPropProtoManager.instance();
-		itemsList = new ArrayList<IItem>();
-		itemBuilder = new ItemBuilder();
+		
 	}
 
-	public void createDatabase() throws IOException{
+	public void createDatabase() throws UnknownHostException, MongoException{
 		try{
+			manager = ItemPropProtoManager.instance();
+			itemsList = new ArrayList<IItem>();
+			itemBuilder = new ItemBuilder();
 			mongoClient = new MongoClient("localhost", 27017);
 			db = mongoClient.getDB("test");
-			collection = db.getCollection("Items");
-		} catch(IOException e){
-			throw new IOException("Cannot Connect");
+			System.out.println(db.getMongo().getVersion());
+			table = db.getCollection("Items");
+			System.out.println("DatabaseConnected");
+		} catch(UnknownHostException e){
+			e.printStackTrace();
+		} catch(MongoException e){
+			e.printStackTrace();
 		}
 	}
 	
-	public void createItemObjects(){
+	public void addItems(){
+		BasicDBObject document = new BasicDBObject();
+		document.put("name", "sumerjoshi");
+		document.put("age", 30);
+		document.put("createdDate", new Date());
+		table.insert(document);
+		table.remove(document);
+	}
+	
+	public void addManager(){
 		manager.addDepartment("Hardware Engineering");
-		manager.addDepartment("Support Engineering");
 		manager.addLocation("Ireland");
-		manager.addLocation("Japan");
-		IItem temp = itemBuilder.buildItem(1, "Cable Box", "A Cable Box for My Stuff", "Ireland", "Hardware Engineering", ItemType.Cable);
-		if(temp != null)
-			this.itemsList.add(temp); 
-		itemBuilder.buildItem(2, "Asus 70P Monitor", "A Display Monitor by Asus", "Japan", "Support Engineering", ItemType.Monitor);
-		itemsList.add(itemBuilder);
+		System.out.println(ItemPropProtoManager.instance().getDepartments());
+		System.out.println(ItemPropProtoManager.instance().getLocations());
+		IItem temp = itemBuilder.buildItem(1, "Cable Box", "Set Top Box", "Ireland", "Hardware Engineering", ItemType.Cable);
 	}
 	
-	public void insertItemObjects() {
-		BasicDBObject dbObject;
-		for(int i = 0; i < itemsList.size(); i++){
-			dbObject = new BasicDBObject();
-			dbObject.append("Items", itemsList.get(i));
-			collection.insert(dbObject);
-			DBCursor cursor = collection.find();
-		  while(cursor.hasNext()){
-		    System.out.println(cursor.next());
-		   }
-		}
-	}
+	
+	
 	
 
 }
