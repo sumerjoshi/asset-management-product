@@ -1,5 +1,6 @@
 package Items;
 
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.mongodb.BasicDBObject;
@@ -15,12 +16,12 @@ public class DatabaseDriver {
 	public DB db;
 	public DBCollection collection;
 	public ItemBuilder itemBuilder;
-	public ArrayList<ItemBuilder> itemsList;
+	public ArrayList<IItem> itemsList;
 	public ItemPropProtoManager manager;
 	
 	public DatabaseDriver(){
 		manager = ItemPropProtoManager.instance();
-		itemsList = new ArrayList<ItemBuilder>();
+		itemsList = new ArrayList<IItem>();
 		itemBuilder = new ItemBuilder();
 	}
 
@@ -39,7 +40,9 @@ public class DatabaseDriver {
 		manager.addDepartment("Support Engineering");
 		manager.addLocation("Ireland");
 		manager.addLocation("Japan");
-		itemBuilder.buildItem(1, "Cable Box", "A Cable Box for My Stuff", "Ireland", "Hardware Engineering", ItemType.Cable);
+		IItem temp = itemBuilder.buildItem(1, "Cable Box", "A Cable Box for My Stuff", "Ireland", "Hardware Engineering", ItemType.Cable);
+		if(temp != null)
+			this.itemsList.add(temp); 
 		itemBuilder.buildItem(2, "Asus 70P Monitor", "A Display Monitor by Asus", "Japan", "Support Engineering", ItemType.Monitor);
 		itemsList.add(itemBuilder);
 	}
