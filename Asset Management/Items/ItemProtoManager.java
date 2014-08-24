@@ -11,6 +11,7 @@ public class ItemProtoManager implements IItemProtoManager
 	private ItemProtoManager()
 	{
 		this._itemDict = new HashMap<ItemType, Item>();
+		populateDict();
 	}
 	
 	public static ItemProtoManager instance()

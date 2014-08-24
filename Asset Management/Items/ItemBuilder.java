@@ -26,7 +26,7 @@ public class ItemBuilder {
 		
 		if (continueBuild)
 		{
-			this._context = new ItemProp(name, desc, loc, dept);
+			this._context = new ItemProp(loc, dept,name, desc);
 			
 			this._holder = this._manager.getItem(it);
 			this._holder.setContext(this._context);					
@@ -69,7 +69,7 @@ public class ItemBuilder {
 		
 		if (continueBuild)
 		{
-			this._context = new ItemProp(name, desc, loc, dept);
+			this._context = new ItemProp(loc, dept,name, desc);
 			
 		}
 		return this._context;
