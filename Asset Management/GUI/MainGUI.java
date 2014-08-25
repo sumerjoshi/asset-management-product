@@ -44,8 +44,8 @@ public class MainGUI
 		
 		this._baseForm.add(this._addButton);
 		
-		this._addButton.setText("Remove Item");
-		this._addButton.addActionListener(new ActionListener() {
+		this._removeButton.setText("Remove Item");
+		this._removeButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

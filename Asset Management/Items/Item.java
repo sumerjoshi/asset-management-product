@@ -88,7 +88,7 @@ public class Item implements IItem
 	public long getID()
 	{
 		if(this._context != null)
-			return this.getID();
+			return this._context.getID();
 		else
 			return -1;
 	}
