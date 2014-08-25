@@ -13,12 +13,13 @@ public class ItemProp
 	{
 	}
 	
-	public ItemProp(String loc, String dep, String name, String desc)
+	public ItemProp(String loc, String dep, String name, String desc, Integer id)
 	{
 		this._location = loc;
 		this._department = dep;
 		this._name = name;
 		this._description = desc;
+		this.id = id;
 	}
 	
 	public void setLocation(String loc)
