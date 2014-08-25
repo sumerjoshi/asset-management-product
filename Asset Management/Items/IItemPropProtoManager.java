@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface IItemPropProtoManager {
 
-	void addLocation(String loc);
-	void addDepartment(String dep);
+	boolean addLocation(String loc);
+	boolean addDepartment(String dep);
 	
 	List<String> getLocations();
 	List<String> getDepartments();	

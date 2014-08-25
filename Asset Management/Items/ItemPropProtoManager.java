@@ -21,15 +21,23 @@ public class ItemPropProtoManager implements IItemPropProtoManager
 		return _inst;
 	}
 	
-	public void addLocation(String loc)
+	public boolean addLocation(String loc)
 	{
 		if (!locationExists(loc))
+		{
 			this._locationList.add(loc);
+			return true;
+		}
+		return false;
 	}
-	public void addDepartment(String dep)
+	public boolean addDepartment(String dep)
 	{
 		if(!departmentExists(dep))
+		{
 			this._departmentList.add(dep);
+			return true;
+		}
+		return false;
 	}
 	
 	public List<String> getLocations()

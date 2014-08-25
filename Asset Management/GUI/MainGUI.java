@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Core.ICore;
+
 public class MainGUI
 {
 	private JFrame _baseForm;
@@ -14,12 +16,15 @@ public class MainGUI
 	private JButton _addButton;
 	private JButton _removeButton;
 	
-	public MainGUI()
+	private ICore _core;
+	
+	public MainGUI(ICore core)
 	{
 		this._baseForm = new JFrame("Gooey");
 		this._basePane = new JPanel();
 		this._addButton = new JButton();
 		this._removeButton = new JButton();
+		this._core = core;
 		init();
 	}
 	
