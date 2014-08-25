@@ -32,7 +32,7 @@ public class ItemProtoManager implements IItemProtoManager
 	public Item getItem(ItemType type)
 	{
 		Item retval = null;
-		retval = this._itemDict.get(type);
+		retval = new Item(type);//this._itemDict.get(type);
 		
 		return retval;
 	}
