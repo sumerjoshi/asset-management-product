@@ -19,7 +19,6 @@ public class Core implements ICore {
 			//database.addItems();
 			database.createSeedData();
 			database.getData();
-			database.addManager();
 		}
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
