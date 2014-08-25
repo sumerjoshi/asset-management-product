@@ -55,17 +55,22 @@ public class DatabaseDriver {
 		System.out.println(ItemPropProtoManager.instance().getLocations());
 		IItem temp = itemBuilder.buildItem(1, "Cable Box", "Set Top Box", "Ireland", "Hardware Engineering", ItemType.Cable);
 		IItem temp2 = itemBuilder.buildItem(2, "Monitor Box", "Set Top Box for Screen", "Japan", "Support Engineering", ItemType.Monitor);
+		IItem temp3 = itemBuilder.buildItem(3, "Question Box", "Set Question Box", "Ireland", "Support Engineering", ItemType.Monitor);
 		cableType.add(temp);
 		cableType.add(temp2);
-		BasicDBObject x;
+		cableType.add(temp3);
+		BasicDBObject x = null;
 		for(int i = 0; i < cableType.size(); i++){
-			x = new BasicDBObject();
-			x.append("Description", cableType.get(i).getDescription());
-			x.append("Name", cableType.get(i).getName());
-			x.append("Location", cableType.get(i).getLocation());
-			x.append("Department", cableType.get(i).getDepartment());
-			x.append("Type", cableType.get(i).getType().toString());
-			table.insert(x);
+			if(cableType.get(i) != null){
+					x = new BasicDBObject();
+					x.append("ID", cableType.get(i).getID());
+					x.append("Description", cableType.get(i).getDescription());
+					x.append("Name", cableType.get(i).getName());
+					x.append("Location", cableType.get(i).getLocation());
+					x.append("Department", cableType.get(i).getDepartment());
+					x.append("Type", cableType.get(i).getType().toString());
+					table.insert(x);
+			}
 		}
 	}
 	
@@ -80,9 +85,6 @@ public class DatabaseDriver {
     }
 	}
 
-	public void addManager(){
-	
-	}
 	
 	
 	
