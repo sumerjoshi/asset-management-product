@@ -21,8 +21,9 @@ public class DatabaseDriver {
 	public DB db;
 	public DBCollection table;
 	public ItemBuilder itemBuilder;
-	public ArrayList<IItem> itemsList;
 	public ItemPropProtoManager manager;
+	
+	public ArrayList<IItem> cableType;
 	
 	public DatabaseDriver(){
 		
@@ -31,35 +32,56 @@ public class DatabaseDriver {
 	public void createDatabase() throws UnknownHostException, MongoException{
 		try{
 			manager = ItemPropProtoManager.instance();
-			itemsList = new ArrayList<IItem>();
 			itemBuilder = new ItemBuilder();
 			mongoClient = new MongoClient("localhost", 27017);
 			db = mongoClient.getDB("test");
 			System.out.println(db.getMongo().getVersion());
 			table = db.getCollection("Items");
-			System.out.println("DatabaseConnected");
 		} catch(UnknownHostException e){
 			e.printStackTrace();
 		} catch(MongoException e){
 			e.printStackTrace();
 		}
 	}
+
 	
-	public void addItems(){
-		BasicDBObject document = new BasicDBObject();
-		document.put("name", "sumerjoshi");
-		document.put("age", 30);
-		document.put("createdDate", new Date());
-		table.insert(document);
-		table.remove(document);
-	}
-	
-	public void addManager(){
+	public void createSeedData(){
+		cableType = new ArrayList<IItem>(); 
 		manager.addDepartment("Hardware Engineering");
 		manager.addLocation("Ireland");
+		manager.addDepartment("Support Engineering");
+		manager.addLocation("Japan");
 		System.out.println(ItemPropProtoManager.instance().getDepartments());
 		System.out.println(ItemPropProtoManager.instance().getLocations());
 		IItem temp = itemBuilder.buildItem(1, "Cable Box", "Set Top Box", "Ireland", "Hardware Engineering", ItemType.Cable);
+		IItem temp2 = itemBuilder.buildItem(2, "Monitor Box", "Set Top Box for Screen", "Japan", "Support Engineering", ItemType.Monitor);
+		cableType.add(temp);
+		cableType.add(temp2);
+		BasicDBObject x;
+		for(int i = 0; i < cableType.size(); i++){
+			x = new BasicDBObject();
+			x.append("Description", cableType.get(i).getDescription());
+			x.append("Name", cableType.get(i).getName());
+			x.append("Location", cableType.get(i).getLocation());
+			x.append("Department", cableType.get(i).getDepartment());
+			x.append("Type", cableType.get(i).getType().toString());
+			table.insert(x);
+		}
+	}
+	
+	public void getData(){
+		DBCursor cursor = table.find();
+    try {
+       while(cursor.hasNext()) {
+           System.out.println(cursor.next());
+       }
+    } finally {
+       cursor.close();
+    }
+	}
+
+	public void addManager(){
+	
 	}
 	
 	
