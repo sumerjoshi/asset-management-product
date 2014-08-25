@@ -7,7 +7,7 @@ public class ItemProp
 	private String _department;
 	private String _name;
 	private String _description;
-	private long _id;
+	private long id;
 	
 	public ItemProp()
 	{
@@ -58,10 +58,10 @@ public class ItemProp
 	}
 
 	public long getID() {
-		return _id;
+		return id;
 	}
 
 	public void setID(long _id) {
-		this._id = _id;
+		this.id = _id;
 	}
 }

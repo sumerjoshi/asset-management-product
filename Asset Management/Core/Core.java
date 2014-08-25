@@ -15,7 +15,9 @@ public class Core implements ICore {
 		DatabaseDriver database = new DatabaseDriver();
 		try {
 			database.createDatabase();
-			database.addItems();
+			//database.addItems();
+			database.createSeedData();
+			database.getData();
 			database.addManager();
 		}
 		catch (UnknownHostException e) {
