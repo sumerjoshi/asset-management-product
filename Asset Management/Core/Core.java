@@ -3,6 +3,7 @@ package Core;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import GUI.MainGUI;
 import Items.DatabaseDriver;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
@@ -28,6 +29,7 @@ public class Core implements ICore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		MainGUI mg = new MainGUI(null);
 	}
 
 	@Override

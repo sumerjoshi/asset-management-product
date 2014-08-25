@@ -13,7 +13,7 @@ public class ItemBuilder {
 		this._manager = ItemProtoManager.instance();
 	}
 	
-	public IItem buildItem(long id, String name, String desc, String loc, String dept, ItemType it)
+	public IItem buildItem(Integer id, String name, String desc, String loc, String dept, ItemType it)
 	{
 		boolean continueBuild = true;
 		this._holder = null;
@@ -56,7 +56,7 @@ public class ItemBuilder {
 	}
 	
 	
-	public ItemProp buildItemProp(long id, String name, String desc, String loc, String dept)
+	public ItemProp buildItemProp(Integer id, String name, String desc, String loc, String dept)
 	{
 		boolean continueBuild = true;
 		this._context = null;

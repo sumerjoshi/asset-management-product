@@ -14,7 +14,7 @@ public interface IItem {
 	public String getName();
 	public void setDescription(String desc);
 	public String getDescription();
-	public void setID(long id);
-	public long getID();
+	public void setID(Integer id);
+	public Integer getID();
 	
 }

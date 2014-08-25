@@ -80,12 +80,12 @@ public class Item implements IItem
 		else
 			return  "";
 	}
-	public void setID(long id)
+	public void setID(Integer id)
 	{
 		if (this._context != null)
 			this._context.setID(id);
 	}
-	public long getID()
+	public Integer getID()
 	{
 		if(this._context != null)
 			return this._context.getID();
