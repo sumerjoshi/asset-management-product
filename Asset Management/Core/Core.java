@@ -1,24 +1,43 @@
 package Core;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
-
 import GUI.MainGUI;
 import Items.DatabaseDriver;
+import Items.IItem;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
-
+import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
 
 public class Core implements ICore {
 	public static void main(String[] args){
 		DatabaseDriver database = new DatabaseDriver();
+		DBCollection itemTable = null; 
+		DBCollection usersTable = null; 
+		ArrayList<IItem> usersList = new ArrayList<IItem>();
+		ArrayList<IItem> itemsList = new ArrayList<IItem>();
 		try {
 			database.createDatabase();
-			//database.addItems();
-			database.createSeedData();
-			database.getData();
+			itemTable = database.createDBCollection("Items", itemTable);
+			usersTable = database.createDBCollection("Users", usersTable);
+			System.out.println("");
+			database.createSeedData(itemTable, itemsList);
+			database.createUserData(usersTable, usersList);
+			System.out.println("");
+			database.getData(itemTable);
+			System.out.println("");
+			database.getData(usersTable);
+			System.out.println("");
+			database.queryForSingleAttribute("Name", usersTable);
+			database.removeItem(itemTable,"Department", "Support");
+			database.getData(itemTable);
+
+			database.dropTable(usersTable);
+			database.dropTable(itemTable);
+			
 		}
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
