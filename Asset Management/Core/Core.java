@@ -201,8 +201,9 @@ public class Core implements ICore {
 	@Override
 	public boolean addItem(String name, String desc, String loc, String dep, int id,
 			ItemType it) {
-		// Add stuff here
-		return false;
+		ItemBuilder ib = new ItemBuilder();
+		ItemProp ip = ib.buildItemProp(id, name, desc, loc, dep, 0);
+		return this.addItem(ip, it);
 	}
 
 	@Override
