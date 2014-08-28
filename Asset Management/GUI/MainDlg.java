@@ -1,7 +1,9 @@
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,6 +16,8 @@ public class MainDlg extends SubGUIPanel{
 	private MainGUI _parent;
 	private JButton _addButton;
 	private JButton _removeButton;
+
+	private JButton _borrowButton;
 	private ICore _core;
 	
 	public MainDlg(MainGUI par, ICore core)
@@ -21,6 +25,7 @@ public class MainDlg extends SubGUIPanel{
 		this._core  = core;
 		this._addButton = new JButton();
 		this._removeButton = new JButton();
+		this._borrowButton = new JButton();
 		this._parent = par;
 		init();
 	}
@@ -48,7 +53,17 @@ public class MainDlg extends SubGUIPanel{
 			}
 		});
 		
-		this.add(this._removeButton);
+		this.add(this._borrowButton);
+		this._borrowButton.setText("Borrow Item");
+		this._borrowButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				changePanels(ModeEnum.BorrowItem);
+			}
+		});
+		
+		this.add(this._borrowButton);
 	}
 	
 	private void changePanels(ModeEnum newMode)
@@ -59,4 +74,7 @@ public class MainDlg extends SubGUIPanel{
 	public void updateValues()
 	{
 	}
+	public void itemStateChanged(ItemEvent evt) {
+        String stuff = (String)evt.getItem();
+    }
 }

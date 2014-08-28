@@ -1,7 +1,9 @@
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,6 +23,7 @@ public class AddItemDlg extends SubGUIPanel{
 		this._cancelButton = new JButton();
 		this._core = core;
 		this._parent = par;
+		init();
 	}
 	
 	public void init()
@@ -59,5 +62,8 @@ public class AddItemDlg extends SubGUIPanel{
 	{
 		this._parent.changeState(newMode);
 	}
+    public void itemStateChanged(ItemEvent evt) {
+        String stuff = (String)evt.getItem();
+    }
 
 }
