@@ -31,10 +31,12 @@ public class Core implements ICore {
 			System.out.println("");
 			database.getData(usersTable);
 			System.out.println("");
+			
 			database.queryForSingleAttribute("Name", usersTable);
-			database.removeItem(itemTable,"Department", "Support");
-			database.getData(itemTable);
-
+			
+			database.removeElementGivenByID(usersTable, "ID", 1, "Department", "IT");
+			database.getData(usersTable);
+			
 			database.dropTable(usersTable);
 			database.dropTable(itemTable);
 			

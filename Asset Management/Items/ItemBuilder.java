@@ -13,7 +13,7 @@ public class ItemBuilder {
 		this._manager = ItemProtoManager.instance();
 	}
 	
-	public IItem buildItem(Integer id, String name, String desc, String loc, String dept, ItemType it)
+	public IItem buildItem(Integer id, String name, String desc, String loc, String dept, ItemType it, Integer user_id)
 	{
 		boolean continueBuild = true;
 		this._holder = null;
@@ -26,7 +26,7 @@ public class ItemBuilder {
 		
 		if (continueBuild)
 		{
-			this._context = new ItemProp(loc, dept,name, desc, id);
+			this._context = new ItemProp(loc, dept,name, desc, id, user_id);
 			
 			this._holder = this._manager.getItem(it);
 			this._holder.setContext(this._context);					
@@ -56,7 +56,7 @@ public class ItemBuilder {
 	}
 	
 	
-	public ItemProp buildItemProp(Integer id, String name, String desc, String loc, String dept)
+	public ItemProp buildItemProp(Integer id, String name, String desc, String loc, String dept, Integer user_id)
 	{
 		boolean continueBuild = true;
 		this._context = null;
@@ -69,7 +69,7 @@ public class ItemBuilder {
 		
 		if (continueBuild)
 		{
-			this._context = new ItemProp(loc, dept,name, desc, id);
+			this._context = new ItemProp(loc, dept,name, desc, id, user_id);
 			
 		}
 		return this._context;

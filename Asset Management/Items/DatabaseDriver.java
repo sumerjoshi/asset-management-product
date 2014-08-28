@@ -58,11 +58,11 @@ public class DatabaseDriver {
 		manager.addLocation("San Jose");
 		manager.addLocation("Research Triangle");
 			
-		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable);
-		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor);
-		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor);
-		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC);
-		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC);
+		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable,0);
+		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor,0);
+		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor,0);
+		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC,0);
+		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC,0);
 	}
 	
 	public void createUserData(DBCollection collection, ArrayList<IItem> userList){
@@ -78,8 +78,8 @@ public class DatabaseDriver {
 		System.out.println(ItemPropProtoManager.instance().getDepartments());
 		System.out.println(ItemPropProtoManager.instance().getLocations());
 		
-		insertItemintoDB(collection, userList, 1, "Cable Box", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
-		insertItemintoDB(collection, userList, 2, "Monitor Box", "Screen Box", "Osaka", "Support", ItemType.Monitor);
+		insertUserintoDB(collection, userList, 100, 1, "Cable Box", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
+		insertUserintoDB(collection, userList, 101, 2, "Monitor Box", "Screen Box", "Osaka", "Support", ItemType.Monitor);
 	}
 
 	
@@ -108,12 +108,11 @@ public class DatabaseDriver {
 	  DBCursor cursor = collection.find(allQuery, fields);
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next());
-			
 		}
 	}
 		
-	public void insertItemintoDB(DBCollection collection, ArrayList<IItem> myList, Integer item_id, String item_name, String item_description, String location, String dept, ItemType t){
-		IItem temp = itemBuilder.buildItem(item_id, item_name, item_description, location, dept, t);
+	public void insertItemintoDB(DBCollection collection, ArrayList<IItem> myList, Integer item_id, String item_name, String item_description, String location, String dept, ItemType t, Integer user_id){
+		IItem temp = itemBuilder.buildItem(item_id, item_name, item_description, location, dept, t, user_id);
 		BasicDBObject x = null;
 		for(int i = 0; i < myList.size(); i++){
 			if(temp.getID() == myList.get(i).getID()){
@@ -127,14 +126,60 @@ public class DatabaseDriver {
 		x.append("Location", temp.getLocation());
 		x.append("Department", temp.getDepartment());
 		x.append("Type", temp.getType().toString());
+		x.append("UID", temp.getUserID());
 		collection.insert(x);
 	}
 	
-	public void removeItem(DBCollection collection, String query, String value){
+	public void insertUserintoDB(DBCollection collection, ArrayList<IItem> myList, Integer user_id, Integer item_id, String item_name, String item_description, String location, String dept, ItemType t){
+		IItem temp = itemBuilder.buildItem(item_id, item_name, item_description, location, dept, t, user_id);
+		BasicDBObject x = null;
+		for(int i = 0; i < myList.size(); i++){
+			if(temp.getID() == myList.get(i).getID()){
+					return;
+			}
+		}
+		x = new BasicDBObject();
+		x.append("UID", temp.getUserID());
+		x.append("ID", temp.getID());
+		x.append("Name", temp.getName());
+		x.append("Description", temp.getDescription());
+		x.append("Location", temp.getLocation());
+		x.append("Department", temp.getDepartment());
+		x.append("Type", temp.getType().toString());
+		collection.insert(x);
+	}
+	
+	
+	//Removing all instances when a query has a specific value
+	public void removeAllItemInstances(DBCollection collection, String query, String value){
 	  BasicDBObject match = new BasicDBObject();
 	  match.append(query, value);
 	  collection.remove(match);
 	}
+	
+	
+	//Specific Method for Removing an Item Specifying its ItemID
+	public void removeItemByID(DBCollection collection, int value){
+		BasicDBObject match = new BasicDBObject();
+	  match.append("ID", value);
+	  collection.remove(match);
+	}
+	
+
+	//Specific Method for Removing Item specifying its UserID
+	public void removeUserByID(DBCollection collection, int value){
+		BasicDBObject match = new BasicDBObject();
+	  match.append("UID", value);
+	  collection.remove(match);
+	}
+	
+	//Could Be UID or ID
+	public void removeElementGivenByID(DBCollection collection, String id, Integer id_value, String query, String value) {
+		BasicDBObject match = new BasicDBObject(id,id_value);
+		BasicDBObject update = new BasicDBObject(query,value);
+		collection.update(match, new BasicDBObject("$unset", update));
+	}
+	
 	
 	
 }

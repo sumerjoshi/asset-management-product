@@ -92,5 +92,17 @@ public class Item implements IItem
 		else
 			return -1;
 	}
+	public void setUserID(Integer id)
+	{
+		if (this._context != null)
+			this._context.setUserID(id);
+	}
+	public Integer getUserID()
+	{
+		if(this._context != null)
+			return this._context.getUserID();
+		else
+			return -1;
+	}
 }
 
