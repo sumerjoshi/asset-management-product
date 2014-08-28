@@ -1,5 +1,7 @@
 package Users;
 
+import com.sun.org.omg.SendingContext._CodeBaseImplBase;
+
 import Core.ICore;
 import Items.ItemProp;
 import Items.ItemType;
@@ -15,7 +17,7 @@ public class Admin implements IUser {
 
 	@Override
 	public boolean removeItem(int id) {
-		return this._base.getCore().deleteItem(id);
+		return this._base.getCore().deleteItem(this._base.getCore().getItemDBC(), id);
 	}
 
 	@Override

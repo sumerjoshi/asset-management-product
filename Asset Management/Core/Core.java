@@ -62,8 +62,8 @@ public class Core implements ICore {
 			System.out.println(ItemPropProtoManager.instance().getDepartments());
 			System.out.println(ItemPropProtoManager.instance().getLocations());
 			
-			itemTable = this._database.createDBCollection("Items", itemTable);
-			usersTable = this._database.createDBCollection("Users", usersTable);
+			itemTable = this._database.createDBCollection("Items");
+			usersTable = this._database.createDBCollection("Users");
 			System.out.println("");
 			
 			prop1 = new ItemProp("San Jose", "IT", "Cable Box", "This is a Cable Box", 1, null);
@@ -232,6 +232,16 @@ public class Core implements ICore {
 	public boolean verifyUser(String username) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public DBCollection getUserDBC() {
+		return this._database.createDBCollection("Users");
+	}
+
+	@Override
+	public DBCollection getItemDBC() {
+		return this._database.createDBCollection("Items");
 	}
 
 

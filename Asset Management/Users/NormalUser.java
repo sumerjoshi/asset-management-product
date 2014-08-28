@@ -19,7 +19,7 @@ public class NormalUser implements IUser {
 	
 	@Override
 	public boolean addItem(ItemProp ip, ItemType it) {
-		return this._core.addItem(ip, it);
+		return this._core.addItem(_core.getItemDBC(), ip, it);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class NormalUser implements IUser {
 	@Override
 	public boolean addItem(String name, String desc, String loc, String dep,
 			int id, ItemType it) {
-		return this._core.addItem(name, desc, loc, dep, id, it);
+		return this._core.addItem(_core.getItemDBC(), name, desc, loc, dep, id, it);
 	}
 
 }

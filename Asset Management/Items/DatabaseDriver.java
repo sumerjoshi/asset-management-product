@@ -39,8 +39,8 @@ public class DatabaseDriver {
 		}
 	}
 	
-	public DBCollection createDBCollection(String name, DBCollection c){
-		c = db.getCollection(name);
+	public DBCollection createDBCollection(String name){
+		DBCollection c = db.getCollection(name);
 		return c;
 	}
 

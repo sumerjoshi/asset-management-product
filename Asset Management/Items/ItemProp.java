@@ -8,7 +8,7 @@ public class ItemProp
 	private String _name;
 	private String _description;
 	private Integer id;
-	private Integer user_id;
+	private Integer user_id = 0;
 	
 	public ItemProp()
 	{

@@ -32,4 +32,7 @@ public interface ICore {
 	boolean addItem(DBCollection collection, ItemProp ip, ItemType it);
 	boolean borrowItem(DBCollection collection, ItemProp pt1, ItemProp pt2);
 	boolean verifyUser(DBCollection collection, String username);
+	
+	DBCollection getUserDBC();
+	DBCollection getItemDBC();
 }

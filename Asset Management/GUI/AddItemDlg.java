@@ -93,7 +93,7 @@ public class AddItemDlg extends SubGUIPanel{
 				{
 				int temp = Integer.parseInt(_idTF.getText());
 				ItemType it = _core.convertToIT((String)_typeCB.getSelectedItem());
-				boolean stat = _core.addItem(_nameTF.getText(), _descTF.getText(), 
+				boolean stat = _parent.getUser().addItem(_nameTF.getText(), _descTF.getText(), 
 						(String)_locCB.getSelectedItem(), (String)_depCB.getSelectedItem(), temp, it);
 				if (stat)
 					_status.setText("Item successfully added");
