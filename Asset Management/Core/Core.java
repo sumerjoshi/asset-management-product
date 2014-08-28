@@ -94,7 +94,6 @@ public class Core implements ICore {
 	@Override
 	public boolean addItem(ItemProp ip, ItemType it) {
 		// TODO Add this item to db.
-		
 		return false;
 	}
 
