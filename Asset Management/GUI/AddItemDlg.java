@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.xml.internal.ws.api.Component;
-
 import Core.ICore;
 import Items.ItemType;
 
@@ -39,7 +37,7 @@ public class AddItemDlg extends SubGUIPanel{
 	private JLabel _descL = new JLabel("Description");
 	private JTextField _descTF = new JTextField();
 	private JLabel _locL = new JLabel("Location");
-	private JComboBox<String> _locCB;
+	private JComboBox _locCB;
 	private JLabel _depL = new JLabel("Department");
 	private JComboBox<String> _depCB;
 	private JLabel _typeL = new JLabel("Item Type");
@@ -147,7 +145,9 @@ public class AddItemDlg extends SubGUIPanel{
 	
 	public void updateValues()
 	{
-		//Empty, does not need it.
+		this._nameTF.setText("");
+		this._descTF.setText("");
+		this._idTF.setText("");
 	}
 	
 	private void changePanels(ModeEnum newMode)

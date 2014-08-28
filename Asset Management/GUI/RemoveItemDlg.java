@@ -94,6 +94,7 @@ public class RemoveItemDlg extends SubGUIPanel {
 	
 	public void updateValues()
 	{
+		this._idTF.setText("");
 	}
 	public void itemStateChanged(ItemEvent evt) {
         String stuff = (String)evt.getItem();

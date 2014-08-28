@@ -18,7 +18,7 @@ public class LoginDlg extends SubGUIPanel
 	private MainGUI _parent;
 	private ICore _core;
 	private JButton _loginButton = new JButton("Login");
-	private JTextField _userTF;
+	private JTextField _userTF = new JTextField();
 	private JLabel _status = new JLabel();
 	
 	
@@ -51,6 +51,7 @@ public class LoginDlg extends SubGUIPanel
 					else
 					{
 						_status.setText("Login invalid");
+						updateValues();
 					}
 				}
 				catch(Exception e)
@@ -68,7 +69,7 @@ public class LoginDlg extends SubGUIPanel
 
 	@Override
 	void updateValues() {
-		// TODO Auto-generated method stub
+		this._userTF.setText("");
 		
 	}
 
