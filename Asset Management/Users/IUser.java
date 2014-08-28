@@ -6,6 +6,8 @@ import Items.ItemType;
 
 public interface IUser {
 	boolean addItem(ItemProp ip, ItemType it);
+	boolean addItem(String name, String desc, String loc, String dep, ItemType it);
+	
 	boolean removeItem(int id);
 	boolean addDepartment(String dept);
 	boolean addLocation(String loc);

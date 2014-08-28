@@ -99,4 +99,10 @@ public class NormalUser implements IUser {
 		return this._core;
 	}
 
+	@Override
+	public boolean addItem(String name, String desc, String loc, String dep,
+			ItemType it) {
+		return this._core.addItem(name, desc, loc, dep, it);
+	}
+
 }

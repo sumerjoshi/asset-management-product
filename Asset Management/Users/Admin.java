@@ -79,4 +79,11 @@ public class Admin implements IUser {
 		return this._base.getCore();
 	}
 
+	@Override
+	public boolean addItem(String name, String desc, String loc, String dep,
+			ItemType it) {
+		
+		return this._base.addItem(name, desc, loc, dep, it);
+	}
+
 }

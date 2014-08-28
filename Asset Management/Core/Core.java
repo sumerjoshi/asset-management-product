@@ -7,6 +7,7 @@ import java.util.List;
 import GUI.MainGUI;
 import Items.DatabaseDriver;
 import Items.IItem;
+import Items.ItemBuilder;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
@@ -173,6 +174,13 @@ public class Core implements ICore {
 	@Override
 	public ItemType convertToIT(String type) {
 		return this._itLookup.get(type);
+	}
+
+	@Override
+	public boolean addItem(String name, String desc, String loc, String dep,
+			ItemType it) {
+		// Add stuff here
+		return false;
 	}
 
 }

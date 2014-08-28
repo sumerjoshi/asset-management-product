@@ -7,6 +7,7 @@ import Items.ItemType;
 
 public interface ICore {
 	boolean addItem(ItemProp ip, ItemType it);
+	boolean addItem(String name, String desc, String loc, String dep, ItemType it);
 	boolean deleteItem(long id);
 	boolean addDepartment(String dept);
 	boolean addLocation(String loc);
