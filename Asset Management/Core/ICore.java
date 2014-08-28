@@ -7,12 +7,10 @@ import Items.ItemType;
 
 public interface ICore {
 	boolean addItem(ItemProp ip, ItemType it);
-<<<<<<< HEAD
+
 	boolean addItem(String name, String desc, String loc, String dep, ItemType it);
-	boolean deleteItem(long id);
-=======
-	boolean deleteItem(Integer id);
->>>>>>> a13e233aaf5809e7f234de531c8c19ffc60a6a6d
+	boolean deleteItem(int id);
+
 	boolean addDepartment(String dept);
 	boolean addLocation(String loc);
 	boolean borrowItem(Integer id);

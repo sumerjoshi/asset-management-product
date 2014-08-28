@@ -122,7 +122,7 @@ public class Core implements ICore {
 	}
 	
 	@Override
-	public boolean deleteItem(Integer id) {
+	public boolean deleteItem(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
