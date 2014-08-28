@@ -58,11 +58,11 @@ public class DatabaseDriver {
 		manager.addLocation("San Jose");
 		manager.addLocation("Research Triangle");
 			
-		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable,0);
-		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor,0);
-		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor,0);
-		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC,0);
-		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC,0);
+		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable, 0);
+		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor, 0);
+		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor, 0);
+		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC, 0);
+		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC, 0);
 	}
 	
 	public void createUserData(DBCollection collection, ArrayList<IItem> userList){
@@ -78,8 +78,8 @@ public class DatabaseDriver {
 		System.out.println(ItemPropProtoManager.instance().getDepartments());
 		System.out.println(ItemPropProtoManager.instance().getLocations());
 		
-		insertUserintoDB(collection, userList, 100, 1, "Cable Box", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
-		insertUserintoDB(collection, userList, 101, 2, "Monitor Box", "Screen Box", "Osaka", "Support", ItemType.Monitor);
+		insertUserintoDB(collection, userList, 100, 1, "Josh Smith", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
+		insertUserintoDB(collection, userList, 101, 2, "Mary Jones", "Screen Box", "Osaka", "Support", ItemType.Monitor);
 	}
 
 	
@@ -134,15 +134,13 @@ public class DatabaseDriver {
 		IItem temp = itemBuilder.buildItem(item_id, item_name, item_description, location, dept, t, user_id);
 		BasicDBObject x = null;
 		for(int i = 0; i < myList.size(); i++){
-			if(temp.getID() == myList.get(i).getID()){
+			if(temp.getUserID() == myList.get(i).getUserID()){
 					return;
 			}
 		}
 		x = new BasicDBObject();
 		x.append("UID", temp.getUserID());
-		x.append("ID", temp.getID());
 		x.append("Name", temp.getName());
-		x.append("Description", temp.getDescription());
 		x.append("Location", temp.getLocation());
 		x.append("Department", temp.getDepartment());
 		x.append("Type", temp.getType().toString());

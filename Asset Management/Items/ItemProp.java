@@ -69,7 +69,7 @@ public class ItemProp
 	}
 	
 	public Integer getUserID() {
-		return id;
+		return user_id;
 	}
 
 	public void setUserID(Integer uid) {
