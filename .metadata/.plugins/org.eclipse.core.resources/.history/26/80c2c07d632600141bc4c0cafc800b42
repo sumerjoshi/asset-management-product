@@ -1,8 +1,0 @@
-package Items;
-
-public interface IItemPropProtoManager {
-
-	void addLocation(String loc);
-	void addDepartment(String dep);
-	
-}

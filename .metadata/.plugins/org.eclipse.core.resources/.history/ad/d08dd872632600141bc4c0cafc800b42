@@ -1,7 +1,0 @@
-package Items;
-
-public interface IItemPropProtoManager {
-
-	void addLocation(String loc);
-	
-}
