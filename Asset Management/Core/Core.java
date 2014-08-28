@@ -116,15 +116,24 @@ public class Core implements ICore {
 	}
 	
 	@Override
-	public boolean addItem(ItemProp ip, ItemType it) {
+	public boolean addItem(DBCollection collection, ItemProp ip, ItemType it) {
 		// TODO Add this item to db.
+		this._database.insertItemintoDB(collection, ip, it);
 		return true;
 	}
 	
 	@Override
-	public boolean deleteItem(int id) {
+	public boolean deleteItem(DBCollection collection, int id) {
 		// TODO Auto-generated method stub
-		return false;
+		this._database.removeItemByID(collection, id);
+		return true;
+	}
+	
+	@Override
+	public boolean deleteUser(DBCollection collection, int id) {
+		// TODO Auto-generated method stub
+		this._database.removeUserByID(collection, id);
+		return true;
 	}
 
 	@Override
@@ -138,9 +147,10 @@ public class Core implements ICore {
 	}
 
 	@Override
-	public boolean borrowItem(Integer id) {
+	public boolean borrowItem(DBCollection collection, ItemProp pt1, ItemProp pt2) {
 		// TODO Auto-generated method stub
-		return false;
+		this._database.transferItem(collection, pt1, pt2);
+		return true;
 	}
 
 	@Override
@@ -151,9 +161,10 @@ public class Core implements ICore {
 
 
 	@Override
-	public boolean verifyUser(String username) {
+	public boolean verifyUser(DBCollection collection, String username) {
 		// TODO return true if username is found
-		return false;
+		this._database.queryForUsername(username, collection);
+		return true;
 	}
 
 
@@ -199,16 +210,29 @@ public class Core implements ICore {
 	}
 
 	@Override
-	public boolean addItem(String name, String desc, String loc, String dep, int id,
+	public boolean addItem(DBCollection collection, String name, String desc, String loc, String dep, int id,
 			ItemType it) {
 		ItemBuilder ib = new ItemBuilder();
 		ItemProp ip = ib.buildItemProp(id, name, desc, loc, dep, 0);
-		return this.addItem(ip, it);
+		return this.addItem(collection, ip, it);
 	}
 
 	@Override
 	public IUser getCurrentUser() {
 		return this._curUser;
 	}
+
+	@Override
+	public boolean borrowItem(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean verifyUser(String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

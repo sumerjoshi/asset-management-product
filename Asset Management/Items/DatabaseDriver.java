@@ -110,6 +110,16 @@ public class DatabaseDriver {
 			System.out.println(cursor.next());
 		}
 	}
+	
+	public void queryForUsername(String value, DBCollection collection){
+		BasicDBObject allQuery = new BasicDBObject("Name", value);
+		allQuery.put("Name", 1);
+	  DBCursor cursor = collection.find(allQuery);
+		while (cursor.hasNext()) {
+			System.out.println(cursor.next());
+		}
+	}
+	
 		
 	public void insertItemintoDB(DBCollection collection, ItemProp ip, ItemType tp){
 		IItem temp = itemBuilder.buildItem(ip.getID(), ip.getName(), ip.getDescription(), ip.getLocation(), ip.getDepartment(), tp, ip.getUserID());
