@@ -6,14 +6,11 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 import javax.swing.*;
 
 import Core.ICore;
-import Items.Item;
-import Items.ItemType;
 
 //Main context behind the states
 public class MainGUI implements ItemListener
@@ -31,7 +28,7 @@ public class MainGUI implements ItemListener
 	
 	public MainGUI(ICore core)
 	{
-		this._baseForm = new JFrame("Gooey");
+		this._baseForm = new JFrame("Asset Management");
 
 		//this._panels = new HashMap<ModeEnum, SubGUIPanel>();
 		this._paneNames = new HashMap<ModeEnum, String>();

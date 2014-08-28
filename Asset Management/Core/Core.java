@@ -9,6 +9,8 @@ import Items.IItem;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
+import Users.IUser;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
@@ -16,6 +18,24 @@ import com.mongodb.MongoException;
 public class Core implements ICore {
 	public static void main(String[] args){
 		DatabaseDriver database = new DatabaseDriver();
+		ICore mainCore = new Core(database);
+		
+		MainGUI mg = new MainGUI(mainCore);
+	}
+	
+	private DatabaseDriver _database;
+	private IUser _curUser;
+	
+	public Core(DatabaseDriver database)
+	{
+		this._database = database;
+		
+		this.initializeDB();
+	}
+	
+	
+	private void initializeDB()
+	{
 		DBCollection itemTable = null; 
 		DBCollection usersTable = null; 
 		ArrayList<IItem> usersList = new ArrayList<IItem>();
@@ -23,30 +43,30 @@ public class Core implements ICore {
 		BasicDBObject x = null;
 		try {
 			x = new BasicDBObject();
-			database.createDatabase();
-			itemTable = database.createDBCollection("Items", itemTable);
-			usersTable = database.createDBCollection("Users", usersTable);
+			this._database.createDatabase();
+			itemTable = this._database.createDBCollection("Items", itemTable);
+			usersTable = this._database.createDBCollection("Users", usersTable);
 			System.out.println("");
-			database.createSeedData(itemTable, itemsList);
-			database.createUserData(usersTable, usersList);
+			this._database.createSeedData(itemTable, itemsList);
+			this._database.createUserData(usersTable, usersList);
 			System.out.println("");
-			database.getData(itemTable);
+			this._database.getData(itemTable);
 			System.out.println("");
-			database.getData(usersTable);
-			System.out.println("");
-			
-			database.transferItem(usersTable, 101, 0 , itemTable, 2, 0);
-			database.getData(itemTable);
-			System.out.println("");
-			database.transferItem(usersTable, 100, 0 , itemTable, 3, 0);
-			database.getData(itemTable);
+			this._database.getData(usersTable);
 			System.out.println("");
 			
-			database.transferItem(usersTable, 100, 101 , itemTable, 2, 3);
-			database.getData(itemTable);
+			this._database.transferItem(usersTable, 101, 0 , itemTable, 2, 0);
+			this._database.getData(itemTable);
+			System.out.println("");
+			this._database.transferItem(usersTable, 100, 0 , itemTable, 3, 0);
+			this._database.getData(itemTable);
+			System.out.println("");
 			
-			database.dropTable(usersTable);
-			database.dropTable(itemTable);
+			this._database.transferItem(usersTable, 100, 101 , itemTable, 2, 3);
+			this._database.getData(itemTable);
+			
+			this._database.dropTable(usersTable);
+			this._database.dropTable(itemTable);
 			
 		}
 		catch (UnknownHostException e) {
@@ -57,12 +77,13 @@ public class Core implements ICore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		MainGUI mg = new MainGUI(null);
+		
 	}
 
 	@Override
 	public boolean addItem(ItemProp ip, ItemType it) {
-		// TODO Auto-generated method stub
+		// TODO Add this item to db.
+		
 		return false;
 	}
 
@@ -92,6 +113,25 @@ public class Core implements ICore {
 	public List<ItemProp> getItemList(ItemType it) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean verifyUser(String username) {
+		// TODO return true if username is found
+		return false;
+	}
+
+
+	@Override
+	public boolean verifyLocation(String loc) {
+		return ItemPropProtoManager.instance().locationExists(loc);
+	}
+
+
+	@Override
+	public boolean verifyDepartment(String dept) {
+		return ItemPropProtoManager.instance().departmentExists(dept);
 	}
 
 }

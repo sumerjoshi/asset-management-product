@@ -1,15 +1,10 @@
 package GUI;
 
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import org.omg.CORBA._PolicyStub;
-
 import Core.ICore;
 
 public class MainDlg extends SubGUIPanel{
@@ -53,7 +48,7 @@ public class MainDlg extends SubGUIPanel{
 			}
 		});
 		
-		this.add(this._borrowButton);
+		this.add(this._removeButton);
 		this._borrowButton.setText("Borrow Item");
 		this._borrowButton.addActionListener(new ActionListener() {
 			
