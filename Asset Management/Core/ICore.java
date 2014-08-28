@@ -13,6 +13,11 @@ public interface ICore {
 	boolean borrowItem(long id);
 	List<ItemProp> getItemList(ItemType it);
 	
+	List<String> getLocations();
+	List<String> getDepartments();
+	List<String> getTypes();
+	ItemType convertToIT(String type);
+	
 	boolean verifyUser(String username);
 	boolean verifyLocation(String loc);
 	boolean verifyDepartment(String dept);

@@ -10,12 +10,16 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import Users.IUser;
+
 import Core.ICore;
 
 //Main context behind the states
 public class MainGUI implements ItemListener
 {
 	JPanel cards;
+	
+	private IUser _curUser = null;
 	
 	private JFrame _baseForm;
 	//private SubGUIPanel _currentPanel;
@@ -104,5 +108,16 @@ public class MainGUI implements ItemListener
         CardLayout cl = (CardLayout)(cards.getLayout());
         String stuff = (String)evt.getItem();
         cl.show(cards, stuff);
+    }
+    
+    public void setUser(IUser user)
+    {
+    	if (user != null)
+    		this._curUser = user;
+    }
+    
+    public IUser getUser()
+    {
+    	return this._curUser;
     }
 }

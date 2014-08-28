@@ -2,6 +2,7 @@ package Core;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import GUI.MainGUI;
 import Items.DatabaseDriver;
@@ -25,14 +26,15 @@ public class Core implements ICore {
 	
 	private DatabaseDriver _database;
 	private IUser _curUser;
+	private HashMap<String, ItemType> _itLookup;
 	
 	public Core(DatabaseDriver database)
 	{
 		this._database = database;
-		
+		this._itLookup = new HashMap<String, ItemType>();
 		this.initializeDB();
+		this.populateITLookup();
 	}
-	
 	
 	private void initializeDB()
 	{
@@ -80,6 +82,15 @@ public class Core implements ICore {
 		
 	}
 
+	private void populateITLookup()
+	{
+		ItemType[] total = ItemType.values();
+		for(int i = 0; i < total.length; i++)
+		{
+			this._itLookup.put(total[i].toString(), total[i]);
+		}
+	}
+	
 	@Override
 	public boolean addItem(ItemProp ip, ItemType it) {
 		// TODO Add this item to db.
@@ -132,6 +143,36 @@ public class Core implements ICore {
 	@Override
 	public boolean verifyDepartment(String dept) {
 		return ItemPropProtoManager.instance().departmentExists(dept);
+	}
+
+
+	@Override
+	public List<String> getLocations() {
+		return ItemPropProtoManager.instance().getLocations();
+	}
+
+
+	@Override
+	public List<String> getDepartments() {
+		return ItemPropProtoManager.instance().getDepartments();
+	}
+
+
+	@Override
+	public List<String> getTypes() {
+		List<String> types = new ArrayList<String>();
+		ItemType[] total = ItemType.values();
+		for(int i = 0; i < total.length; i++)
+		{
+			types.add(total[i].toString());
+		}
+		return types;
+	}
+
+
+	@Override
+	public ItemType convertToIT(String type) {
+		return this._itLookup.get(type);
 	}
 
 }
