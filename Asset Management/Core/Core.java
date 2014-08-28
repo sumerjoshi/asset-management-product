@@ -11,7 +11,6 @@ import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
 import Users.IUser;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
@@ -20,7 +19,6 @@ public class Core implements ICore {
 	public static void main(String[] args){
 		DatabaseDriver database = new DatabaseDriver();
 		ICore mainCore = new Core(database);
-		
 		MainGUI mg = new MainGUI(mainCore);
 	}
 	
@@ -42,34 +40,59 @@ public class Core implements ICore {
 		DBCollection usersTable = null; 
 		ArrayList<IItem> usersList = new ArrayList<IItem>();
 		ArrayList<IItem> itemsList = new ArrayList<IItem>();
-		BasicDBObject x = null;
+		ItemProp prop = null;
+		ItemProp prop1 = null;
 		try {
-			x = new BasicDBObject();
+			
+			
 			this._database.createDatabase();
+			
+
+			this._database.manager.addDepartment("Engineering");
+			this._database.manager.addDepartment("Support");
+			this._database.manager.addDepartment("Design");
+			this._database.manager.addDepartment("IT");
+			
+			this._database.manager.addLocation("Ireland");
+			this._database.manager.addLocation("Japan");
+			this._database.manager.addLocation("San Jose");
+			this._database.manager.addLocation("Research Triangle");
+			
+			System.out.println(ItemPropProtoManager.instance().getDepartments());
+			System.out.println(ItemPropProtoManager.instance().getLocations());
+			
 			itemTable = this._database.createDBCollection("Items", itemTable);
 			usersTable = this._database.createDBCollection("Users", usersTable);
 			System.out.println("");
-			this._database.createSeedData(itemTable, itemsList);
-			this._database.createUserData(usersTable, usersList);
+			
+			prop1 = new ItemProp("San Jose", "IT", "Cable Box", "This is a Cable Box", 1, null);
+			this._database.insertItemintoDB(itemTable, prop1, ItemType.Monitor);
+			
+			prop = new ItemProp("Ireland", "Engineering", "John Smith", "", 0, 102);
+			this._database.insertUserintoDB(usersTable, prop, ItemType.Cable);
+			
 			System.out.println("");
 			this._database.getData(itemTable);
 			System.out.println("");
 			this._database.getData(usersTable);
 			System.out.println("");
 			
-			this._database.transferItem(usersTable, 101, 0 , itemTable, 2, 0);
-			this._database.getData(itemTable);
-			System.out.println("");
-			this._database.transferItem(usersTable, 100, 0 , itemTable, 3, 0);
-			this._database.getData(itemTable);
-			System.out.println("");
-			
-			this._database.transferItem(usersTable, 100, 101 , itemTable, 2, 3);
-			this._database.getData(itemTable);
+//			this._database.transferItem(usersTable, 101, 0 , itemTable, 2, 0);
+//			this._database.getData(itemTable);
+//			System.out.println("");
+//			this._database.transferItem(usersTable, 100, 0 , itemTable, 3, 0);
+//			this._database.getData(itemTable);
+//			System.out.println("");
+//			
+//			this._database.transferItem(usersTable, 100, 101 , itemTable, 2, 3);
+//			this._database.getData(itemTable);
+//			
+//		
+//			
+//			this._database.getData(usersTable);
 			
 			this._database.dropTable(usersTable);
 			this._database.dropTable(itemTable);
-			
 		}
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -94,11 +117,11 @@ public class Core implements ICore {
 	@Override
 	public boolean addItem(ItemProp ip, ItemType it) {
 		// TODO Add this item to db.
-		return false;
+		return true;
 	}
-
+	
 	@Override
-	public boolean deleteItem(long id) {
+	public boolean deleteItem(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -114,7 +137,7 @@ public class Core implements ICore {
 	}
 
 	@Override
-	public boolean borrowItem(long id) {
+	public boolean borrowItem(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
