@@ -9,6 +9,7 @@ import Items.IItem;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
 
@@ -19,7 +20,9 @@ public class Core implements ICore {
 		DBCollection usersTable = null; 
 		ArrayList<IItem> usersList = new ArrayList<IItem>();
 		ArrayList<IItem> itemsList = new ArrayList<IItem>();
+		BasicDBObject x = null;
 		try {
+			x = new BasicDBObject();
 			database.createDatabase();
 			itemTable = database.createDBCollection("Items", itemTable);
 			usersTable = database.createDBCollection("Users", usersTable);
@@ -32,10 +35,15 @@ public class Core implements ICore {
 			database.getData(usersTable);
 			System.out.println("");
 			
-			database.queryForSingleAttribute("Name", usersTable);
+			database.transferItem(usersTable, 101, 0 , itemTable, 2, 0);
+			database.getData(itemTable);
+			System.out.println("");
+			database.transferItem(usersTable, 100, 0 , itemTable, 3, 0);
+			database.getData(itemTable);
+			System.out.println("");
 			
-			database.removeElementGivenByID(usersTable, "ID", 1, "Department", "IT");
-			database.getData(usersTable);
+			database.transferItem(usersTable, 100, 101 , itemTable, 2, 3);
+			database.getData(itemTable);
 			
 			database.dropTable(usersTable);
 			database.dropTable(itemTable);

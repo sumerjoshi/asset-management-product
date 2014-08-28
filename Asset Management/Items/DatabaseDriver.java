@@ -58,11 +58,11 @@ public class DatabaseDriver {
 		manager.addLocation("San Jose");
 		manager.addLocation("Research Triangle");
 			
-		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable, 0);
-		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor, 0);
-		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor, 0);
-		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC, 0);
-		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC, 0);
+		insertItemintoDB(collection, itemsList, 1, "Cable Box", "Cable Box", "Ireland", "Engineering", ItemType.Cable, null);
+		insertItemintoDB(collection, itemsList, 2, "Monitor Box", "Screen Box", "Japan", "Support", ItemType.Monitor, null);
+		insertItemintoDB(collection, itemsList, 3, "Question Box", "Set Question Box", "Ireland", "Support", ItemType.Monitor, null);
+		insertItemintoDB(collection, itemsList, 4, "Windows Laptop", "Lenovo TL900", "San Jose", "IT", ItemType.PC, null);
+		insertItemintoDB(collection, itemsList, 5, "Adobe Design Studio", "Macbook Retina Display", "Research Triangle", "Engineering", ItemType.PC, null);
 	}
 	
 	public void createUserData(DBCollection collection, ArrayList<IItem> userList){
@@ -78,8 +78,8 @@ public class DatabaseDriver {
 		System.out.println(ItemPropProtoManager.instance().getDepartments());
 		System.out.println(ItemPropProtoManager.instance().getLocations());
 		
-		insertUserintoDB(collection, userList, 100, 1, "Josh Smith", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
-		insertUserintoDB(collection, userList, 101, 2, "Mary Jones", "Screen Box", "Osaka", "Support", ItemType.Monitor);
+		insertUserintoDB(collection, userList, 100, 0, "Josh Smith", "Cable Box", "Botswana", "Engineering", ItemType.Cable);
+		insertUserintoDB(collection, userList, 101, 0, "Mary Jones", "Screen Box", "Osaka", "Support", ItemType.Monitor);
 	}
 
 	
@@ -148,7 +148,7 @@ public class DatabaseDriver {
 	}
 	
 	
-	//Removing all instances when a query has a specific value
+	//Removing all instances in the Collection when a query has a specific value
 	public void removeAllItemInstances(DBCollection collection, String query, String value){
 	  BasicDBObject match = new BasicDBObject();
 	  match.append(query, value);
@@ -177,9 +177,37 @@ public class DatabaseDriver {
 		BasicDBObject update = new BasicDBObject(query,value);
 		collection.update(match, new BasicDBObject("$unset", update));
 	}
+		
+	//Claiming an Item for a User
+	public void claimItem(DBCollection userCollection, int user_id_value, DBCollection itemCollection, int item_id_value){	
+		BasicDBObject userIDfromUsersTable = new BasicDBObject("UID", user_id_value);
+		BasicDBObject userIDtoBeReplaced = new BasicDBObject("ID", item_id_value);
+		itemCollection.update(userIDtoBeReplaced, new BasicDBObject("$set", userIDfromUsersTable));
+	}
 	
 	
-	
+	public void transferItem(DBCollection userCollection, int user_id_value, int new_user_id_value, DBCollection itemCollection, int item_id_value, int new_item_id_value){
+		BasicDBObject ref = new BasicDBObject("ID", item_id_value);
+		BasicDBObject ref2 = new BasicDBObject("UID", user_id_value);
+		BasicDBObject ref3 = new BasicDBObject("ID", new_item_id_value);
+		BasicDBObject ref4 = new BasicDBObject("UID", new_user_id_value);
+		DBCursor cursor = itemCollection.find(ref, ref2);
+		if(cursor.hasNext() && cursor.count() == 1){
+			BasicDBObject dbObject = (BasicDBObject) cursor.next(); 
+			String a = dbObject.getString("UID");
+			if(a == null){
+				claimItem(userCollection, user_id_value, itemCollection, item_id_value);
+			} else {
+				System.out.println("Do you want to swap item?");
+				DBCursor cursor2 = itemCollection.find(ref3, ref4);
+				if(cursor2.hasNext() && cursor2.count() == 1){
+					itemCollection.update(ref, new BasicDBObject("$unset", ref2));
+					itemCollection.update(ref, new BasicDBObject("$set", ref2));
+					itemCollection.update(ref3, new BasicDBObject("$set", ref4));
+			}
+			}
+		}
+	}
 }
 
 
