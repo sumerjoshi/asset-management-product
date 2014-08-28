@@ -30,6 +30,7 @@ public class AddItemDlg extends SubGUIPanel{
 	private JPanel _dRow = new JPanel();
 	private JPanel _lRow = new JPanel();
 	private JPanel _deRow = new JPanel();
+	private JPanel _idRow = new JPanel();
 	private JPanel _bRow = new JPanel();
 
 	
@@ -44,6 +45,8 @@ public class AddItemDlg extends SubGUIPanel{
 	private JLabel _typeL = new JLabel("Item Type");
 	private JComboBox<String> _typeCB;
 	private JLabel _status = new JLabel("Idle");
+	private JLabel _idL = new JLabel("Item ID");
+	private JTextField _idTF = new JTextField("");
 	
 	
 	private ICore _core;
@@ -66,6 +69,7 @@ public class AddItemDlg extends SubGUIPanel{
 		
 		this._nameTF.setPreferredSize(new Dimension(100, 20));
 		this._descTF.setPreferredSize(new Dimension(100, 20));
+		this._idTF.setPreferredSize(new Dimension(100, 20));
 		
 		this._nRow.add(_nameL);
 		this._nRow.add(_nameTF);
@@ -77,6 +81,8 @@ public class AddItemDlg extends SubGUIPanel{
 		this._deRow.add(_depCB);
 		this._tRow.add(_typeL);
 		this._tRow.add(_typeCB);
+		this._idRow.add(_idL);
+		this._idRow.add(_idTF);
 		
 		this._addButton.setText("Add Item");
 		this._addButton.addActionListener(new ActionListener() {
@@ -85,9 +91,10 @@ public class AddItemDlg extends SubGUIPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				try
 				{
+				int temp = Integer.parseInt(_idTF.getText());
 				ItemType it = _core.convertToIT((String)_typeCB.getSelectedItem());
 				boolean stat = _core.addItem(_nameTF.getText(), _descTF.getText(), 
-						(String)_locCB.getSelectedItem(), (String)_depCB.getSelectedItem(), it);
+						(String)_locCB.getSelectedItem(), (String)_depCB.getSelectedItem(), temp, it);
 				if (stat)
 					_status.setText("Item successfully added");
 				else
@@ -118,6 +125,7 @@ public class AddItemDlg extends SubGUIPanel{
 		this.add(this._dRow);
 		this.add(this._lRow);
 		this.add(this._deRow);
+		this.add(this._idRow);
 		this.add(this._bRow);
 		this.add(this._status);
 	}

@@ -11,7 +11,6 @@ public class MainDlg extends SubGUIPanel{
 	private MainGUI _parent;
 	private JButton _addButton;
 	private JButton _removeButton;
-
 	private JButton _borrowButton;
 	private ICore _core;
 	

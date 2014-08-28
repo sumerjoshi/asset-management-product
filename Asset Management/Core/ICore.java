@@ -4,11 +4,12 @@ import java.util.List;
 
 import Items.ItemProp;
 import Items.ItemType;
+import Users.IUser;
 
 public interface ICore {
 	boolean addItem(ItemProp ip, ItemType it);
 
-	boolean addItem(String name, String desc, String loc, String dep, ItemType it);
+	boolean addItem(String name, String desc, String loc, String dep,int id, ItemType it);
 	boolean deleteItem(int id);
 
 	boolean addDepartment(String dept);
@@ -24,4 +25,5 @@ public interface ICore {
 	boolean verifyUser(String username);
 	boolean verifyLocation(String loc);
 	boolean verifyDepartment(String dept);
+	IUser getCurrentUser();
 }

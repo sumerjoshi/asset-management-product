@@ -199,10 +199,15 @@ public class Core implements ICore {
 	}
 
 	@Override
-	public boolean addItem(String name, String desc, String loc, String dep,
+	public boolean addItem(String name, String desc, String loc, String dep, int id,
 			ItemType it) {
 		// Add stuff here
 		return false;
+	}
+
+	@Override
+	public IUser getCurrentUser() {
+		return this._curUser;
 	}
 
 }

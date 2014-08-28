@@ -101,8 +101,8 @@ public class NormalUser implements IUser {
 
 	@Override
 	public boolean addItem(String name, String desc, String loc, String dep,
-			ItemType it) {
-		return this._core.addItem(name, desc, loc, dep, it);
+			int id, ItemType it) {
+		return this._core.addItem(name, desc, loc, dep, id, it);
 	}
 
 }
