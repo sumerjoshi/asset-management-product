@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
@@ -19,13 +20,15 @@ public class LoginDlg extends SubGUIPanel
 	private ICore _core;
 	private JButton _loginButton = new JButton("Login");
 	private JTextField _userTF = new JTextField();
+	private JLabel _userL = new JLabel("User Name");
 	private JLabel _status = new JLabel();
-	
+	private JPanel _userRow = new JPanel();
 	
 	public LoginDlg(MainGUI par,ICore core)
 	{
 		this._parent = par;
 		this._core = core;
+		
 		
 		init();
 	}
@@ -60,8 +63,10 @@ public class LoginDlg extends SubGUIPanel
 				}
 			}
 		});
+		this._userRow.add(this._userL);
+		this._userRow.add(this._userTF);
 		
-		this.add(this._userTF);
+		this.add(this._userRow);
 		this.add(this._loginButton);
 		this.add(this._status);
 		

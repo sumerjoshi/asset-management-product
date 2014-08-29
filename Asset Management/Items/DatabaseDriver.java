@@ -4,6 +4,7 @@ package Items;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -111,13 +112,19 @@ public class DatabaseDriver {
 		}
 	}
 	
-	public void queryForUsername(String value, DBCollection collection){
+	public BasicDBObject queryForUsername(String value, DBCollection collection){
+
 		BasicDBObject allQuery = new BasicDBObject("Name", value);
-		allQuery.put("Name", 1);
-	  DBCursor cursor = collection.find(allQuery);
+		allQuery.put("Name",value);
+		DBCursor cursor = collection.find(allQuery);
 		while (cursor.hasNext()) {
-			System.out.println(cursor.next());
+			allQuery = (BasicDBObject) cursor.next();
+			String firstName = allQuery.getString("Name");
+			System.out.println( (String) allQuery.get("Name"));
+			return allQuery;
 		}
+		return null;
+
 	}
 	
 		
@@ -153,7 +160,7 @@ public class DatabaseDriver {
 		x.append("Name", temp.getName());
 		x.append("Location", temp.getLocation());
 		x.append("Department", temp.getDepartment());
-		x.append("Type", temp.getType().toString());
+		x.append("Type", temp.getDescription());
 		collection.insert(x);
 	}
 	
@@ -232,6 +239,7 @@ public class DatabaseDriver {
 			}
 		}
 	}
+	
 }
 
 

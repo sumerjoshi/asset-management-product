@@ -11,9 +11,13 @@ import Items.ItemBuilder;
 import Items.ItemProp;
 import Items.ItemPropProtoManager;
 import Items.ItemType;
+import Users.Admin;
 import Users.IUser;
+import Users.NormalUser;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 
 public class Core implements ICore {
@@ -21,6 +25,7 @@ public class Core implements ICore {
 		DatabaseDriver database = new DatabaseDriver();
 		ICore mainCore = new Core(database);
 		MainGUI mg = new MainGUI(mainCore);
+		
 	}
 	
 	private DatabaseDriver _database;
@@ -43,9 +48,7 @@ public class Core implements ICore {
 		ArrayList<IItem> itemsList = new ArrayList<IItem>();
 		ItemProp prop = null;
 		ItemProp prop1 = null;
-		try {
-			
-			
+		try {			
 			this._database.createDatabase();
 			
 
@@ -69,7 +72,7 @@ public class Core implements ICore {
 			prop1 = new ItemProp("San Jose", "IT", "Cable Box", "This is a Cable Box", 1, null);
 			this._database.insertItemintoDB(itemTable, prop1, ItemType.Monitor);
 			
-			prop = new ItemProp("Ireland", "Engineering", "John Smith", "", 0, 102);
+			prop = new ItemProp("Ireland", "Engineering", "John", "Admin", 0, 102);
 			this._database.insertUserintoDB(usersTable, prop, ItemType.Cable);
 			
 			System.out.println("");
@@ -92,8 +95,7 @@ public class Core implements ICore {
 //			
 //			this._database.getData(usersTable);
 			
-			this._database.dropTable(usersTable);
-			this._database.dropTable(itemTable);
+			
 		}
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -162,9 +164,15 @@ public class Core implements ICore {
 
 	@Override
 	public boolean verifyUser(DBCollection collection, String username) {
-		// TODO return true if username is found
-		this._database.queryForUsername(username, collection);
-		return true;
+		BasicDBObject temp = this._database.queryForUsername(username, collection);
+		if (temp != null)
+		{
+			this._curUser = this.DBObjectToUser(temp);
+			return true;
+		}
+		else
+			return false;
+
 	}
 
 
@@ -230,8 +238,7 @@ public class Core implements ICore {
 
 	@Override
 	public boolean verifyUser(String username) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.verifyUser(getUserDBC(), username);
 	}
 
 	@Override
@@ -244,5 +251,37 @@ public class Core implements ICore {
 		return this._database.createDBCollection("Items");
 	}
 
+	private IUser DBObjectToUser(BasicDBObject ob)
+	{
+		IUser temp = null;
+		try
+		{
+			String type = (String)ob.get("Type");
+			if (type == "Admin")
+				temp = new Admin();
+			else
+				temp = new NormalUser(this);
+			
+			temp.setID((Integer)ob.get("UID"));
+			temp.setDepartment((String)ob.get("Department"));
+			temp.setLocation((String)ob.get("Location"));
+			temp.setUserName((String)ob.get("Name"));
+		}
+		catch (Exception e)
+		{
+			temp = null;
+		}
+		
+		return temp;
+	}
+
+	@Override
+	public void clearDB() {
+		this._database.dropTable(this.getUserDBC());
+		this._database.dropTable(this.getItemDBC());
+		
+	}
+	
+	
 
 }

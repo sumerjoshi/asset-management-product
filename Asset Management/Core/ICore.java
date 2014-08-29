@@ -35,4 +35,5 @@ public interface ICore {
 	
 	DBCollection getUserDBC();
 	DBCollection getItemDBC();
+	void clearDB();
 }

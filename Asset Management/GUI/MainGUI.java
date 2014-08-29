@@ -55,7 +55,7 @@ public class MainGUI implements ItemListener
 	    this._baseForm.pack();
     	//this._baseForm.setLocationRelativeTo(null);
 	    this._baseForm.setVisible(true);
-		this.changeState(ModeEnum.home);
+		this.changeState(ModeEnum.Login);
 	}
 	
 	private void populatePanels(Container pane)

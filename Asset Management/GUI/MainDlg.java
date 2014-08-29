@@ -67,6 +67,7 @@ public class MainDlg extends SubGUIPanel{
 	
 	public void updateValues()
 	{
+		
 	}
 	public void itemStateChanged(ItemEvent evt) {
         String stuff = (String)evt.getItem();
